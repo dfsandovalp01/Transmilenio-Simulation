@@ -1,0 +1,16 @@
+globals [ 
+	prob_of_service
+	gm_org
+	gm_dest
+	time
+	time_string
+	mean_waiting_ticks_taxi
+	mean_waiting_ticks_uber
+	min_penalty
+	max_speed
+	min_max_speed
+	TAXI_CODE
+	UBER_CODE
+  TRANSMILENIO_CODE
+  number_of_transmilenio
+]
