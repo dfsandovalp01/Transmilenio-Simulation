@@ -13,4 +13,6 @@ globals [
 	UBER_CODE
   TRANSMILENIO_CODE
   number_of_transmilenio
+  soacha-x soacha-y    ;; location soacha  transmilenio
+  suba-x suba-y    ;; location suba transmilenio
 ]

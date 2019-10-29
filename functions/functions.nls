@@ -11,6 +11,10 @@ to setup
 ;	set UBER_CODE 1
  set TRANSMILENIO_CODE 2
  set number_of_transmilenio 1
+ set soacha-x 0
+ set soacha-y 7.392
+ set suba-x 21.984 
+ set suba-y 29.056
 ;	; ----------- graph radius ------------
 ;	ask patch 31 13 [set pcolor red]
 ;	; -------------------------------------
@@ -33,6 +37,7 @@ to setup
 end
 ; Go function --------------------------------------------------------------------
 to go
+
 ;  export_data_new
 ;  ;;export_grl_data
 ;  if ticks = total_ticks [stop]
@@ -54,6 +59,14 @@ to go
 ;	ask drivers with [last_vertex = nobody] [
 ;		user-message word "last_vertex empty" self
 ;	]
+  ask drivers [
+    facexy suba-x suba-y 
+    fd 0.01
+   ;correct-path
+    ;show xcor
+  ]
+  
+  
 ;
 ;	;export_data_new
 ;	;export_grl_data
@@ -61,6 +74,13 @@ to go
 ;
   tick
 end
+
+to correct-path
+  ;if [xcor >= suba-x]
+  ;[ facexy suba-x suba-y]
+  
+ 
+end 
 
 ; --------- creating turtles ----------
 
@@ -105,16 +125,16 @@ to create-drivers-fn
 ;    move-to  vertex-to-move
 ;  ]
   create-drivers number_of_transmilenio [
-    setxy random-xcor random-ycor
-		let vertex-to-move min-one-of (vertices) [ distance myself ]
+    setxy soacha-x soacha-y
+		;let vertex-to-move min-one-of (vertices) [ distance myself ]
     set shape "circle 2"
     set color red
     set size 0.5
     set type-of-driver "transmilenio"
 ;		set state 2
-		set path []
-		set last_vertex vertex-to-move
-    move-to vertex-to-move
+		;set path []
+		;set last_vertex vertex-to-move
+    ;move-to vertex-to-move
   ]
 end
 

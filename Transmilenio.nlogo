@@ -1,11 +1,11 @@
 __includes [
-  "csv_import/globals.nls"
-  "csv_import/entities.nls"
-  "csv_import/create-graph.nls"
+  "csv/globals.nls"
+  "csv/entities.nls"
+  "csv/create-graph.nls"
 
-  "core/entities.nls"
-  "core/functions.nls"
-  "core/globals.nls"
+  "functions/entities.nls"
+  "functions/functions.nls"
+  "functions/globals.nls"
 
 ;  "person/functions.nls"
 ;  "driver/functions.nls"
@@ -72,16 +72,6 @@ NIL
 NIL
 NIL
 NIL
-1
-
-TEXTBOX
-13
-10
-163
-28
-Initial settings
-11
-0.0
 1
 
 @#$#@#$#@
