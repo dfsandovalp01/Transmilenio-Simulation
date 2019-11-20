@@ -1,0 +1,157 @@
+globals [ 
+  path-pA
+  path-pB
+  path-pC
+  path-pD
+  path-pE
+  path-pF
+  path-pG
+  path-pH
+  path-pI
+  portales-coor
+  ]
+turtles-own [ road speed]
+
+breed [transmilenios transmilenio]
+breed [portales portal]
+transmilenios-own [
+	path
+	last_status_change
+	last_vertex ; the idea here is to use this vertex in order to be the first element in path to avoid flying cars
+  current_vertice
+  customer
+  
+]
+
+portales-own [
+  destination
+  last_status_change
+]
+
+to assign-coord-portales
+  set portales-coor (list (vertex 30) (vertex 20) (vertex 14) (vertex 95) (vertex 87) (vertex 138) (vertex 109) (vertex 142) (vertex 45))
+end
+
+to assign-path-portales
+  set path-pA (list (vertex 150) (vertex 125) (vertex 12) (vertex 78) (vertex 17) (vertex 145) (vertex 33) (vertex 46) (vertex 108) (vertex 11) (vertex 61) (vertex 10) (vertex 36) (vertex 38)
+    (vertex 65) (vertex 35) (vertex 42) (vertex 96) (vertex 79) (vertex 107) (vertex 111) (vertex 131) (vertex 81) (vertex 140) (vertex 110) (vertex 139) (vertex 3) (vertex 21) (vertex 56) (vertex 2)
+    (vertex 74) (vertex 55) (vertex 44) (vertex 85) (vertex 84) (vertex 86) (vertex 29) (vertex 27) (vertex 26) (vertex 73) (vertex 72) (vertex 54) (vertex 71) (vertex 70) (vertex 68) (vertex 141)
+    (vertex 115) (vertex 69) (vertex 87))
+  
+  set path-pB (list (vertex 150) (vertex 125) (vertex 12) (vertex 78) (vertex 17) (vertex 145) (vertex 33) (vertex 46) (vertex 108) (vertex 11) (vertex 61) (vertex 10) (vertex 36) (vertex 38)
+    (vertex 65) (vertex 35) (vertex 42) (vertex 96) (vertex 77) (vertex 149) (vertex 148) (vertex 133) (vertex 91) (vertex 124) (vertex 120) (vertex 127) (vertex 132) (vertex 51) (vertex 62) (vertex 16)
+    (vertex 89) (vertex 45))
+  
+  set path-pC (list (vertex 150) (vertex 125) (vertex 12) (vertex 78) (vertex 17) (vertex 145) (vertex 33) (vertex 46) (vertex 108) (vertex 11) (vertex 61) (vertex 10) (vertex 36) (vertex 38)
+    (vertex 65) (vertex 35) (vertex 42) (vertex 96) (vertex 79) (vertex 107) (vertex 111) (vertex 64) (vertex 143) (vertex 121) (vertex 13) (vertex 76) (vertex 28) (vertex 93) (vertex 92) (vertex 130)
+    (vertex 32) (vertex 142))
+  
+  set path-pD (list (vertex 150) (vertex 125) (vertex 12) (vertex 78) (vertex 17) (vertex 145) (vertex 33) (vertex 46) (vertex 108) (vertex 11) (vertex 61) (vertex 10) (vertex 36) (vertex 38)
+    (vertex 65) (vertex 35) (vertex 42) (vertex 96) (vertex 79) (vertex 107) (vertex 111) (vertex 25) (vertex 5) (vertex 52) (vertex 4) (vertex 8) (vertex 53) (vertex 39) (vertex 83) (vertex 135)
+    (vertex 0) (vertex 99) (vertex 44) (vertex 85) (vertex 84) (vertex 86) (vertex 29) (vertex 27) (vertex 26) (vertex 73) (vertex 72) (vertex 54) (vertex 71) (vertex 70) (vertex 68) (vertex 141)
+    (vertex 115) (vertex 69) (vertex 87))
+  
+  set path-pE (list (vertex 150) (vertex 125) (vertex 12) (vertex 78) (vertex 17) (vertex 145) (vertex 33) (vertex 46) (vertex 108) (vertex 11) (vertex 61) (vertex 10) (vertex 36) (vertex 38)
+    (vertex 65) (vertex 35) (vertex 42) (vertex 96) (vertex 79) (vertex 107) (vertex 111) (vertex 131) (vertex 81) (vertex 140) (vertex 110) (vertex 139) (vertex 3) (vertex 21) (vertex 56) (vertex 2)
+    (vertex 74) (vertex 55) (vertex 44) (vertex 85) (vertex 84) (vertex 86) (vertex 29) (vertex 27) (vertex 26) (vertex 73) (vertex 72) (vertex 54) (vertex 71) (vertex 70) (vertex 68) (vertex 141)
+    (vertex 115) (vertex 69) (vertex 87))
+  
+  set path-pF (list (vertex 150) (vertex 125) (vertex 12) (vertex 78) (vertex 17) (vertex 145) (vertex 33) (vertex 46) (vertex 108) (vertex 11) (vertex 61) (vertex 10) (vertex 36) (vertex 38)
+    (vertex 65) (vertex 35) (vertex 42) (vertex 96) (vertex 79) (vertex 107) (vertex 111) (vertex 131) (vertex 81) (vertex 140) (vertex 110) (vertex 139) (vertex 3) (vertex 21) (vertex 56) (vertex 2)
+    (vertex 74) (vertex 55) (vertex 44) (vertex 85) (vertex 84) (vertex 86) (vertex 29) (vertex 27) (vertex 26) (vertex 73) (vertex 72) (vertex 54) (vertex 71) (vertex 70) (vertex 68) (vertex 141)
+    (vertex 115) (vertex 69) (vertex 87))
+  
+  set path-pG (list (vertex 150) (vertex 125) (vertex 12) (vertex 78) (vertex 17) (vertex 145) (vertex 33) (vertex 46) (vertex 108) (vertex 11) (vertex 61) (vertex 10) (vertex 36) (vertex 38)
+    (vertex 65) (vertex 35) (vertex 42) (vertex 96) (vertex 79) (vertex 107) (vertex 111) (vertex 131) (vertex 81) (vertex 140) (vertex 110) (vertex 139) (vertex 3) (vertex 21) (vertex 56) (vertex 2)
+    (vertex 74) (vertex 55) (vertex 44) (vertex 85) (vertex 84) (vertex 86) (vertex 29) (vertex 27) (vertex 26) (vertex 73) (vertex 72) (vertex 54) (vertex 71) (vertex 70) (vertex 68) (vertex 141)
+    (vertex 115) (vertex 69) (vertex 87))
+  
+  set path-pH (list (vertex 150) (vertex 125) (vertex 12) (vertex 78) (vertex 17) (vertex 145) (vertex 33) (vertex 46) (vertex 108) (vertex 11) (vertex 61) (vertex 10) (vertex 36) (vertex 38)
+    (vertex 65) (vertex 35) (vertex 42) (vertex 96) (vertex 79) (vertex 107) (vertex 111) (vertex 131) (vertex 81) (vertex 140) (vertex 110) (vertex 139) (vertex 3) (vertex 21) (vertex 56) (vertex 2)
+    (vertex 74) (vertex 55) (vertex 44) (vertex 85) (vertex 84) (vertex 86) (vertex 29) (vertex 27) (vertex 26) (vertex 73) (vertex 72) (vertex 54) (vertex 71) (vertex 70) (vertex 68) (vertex 141)
+    (vertex 115) (vertex 69) (vertex 87))
+  
+  set path-pI (list (vertex 150) (vertex 125) (vertex 12) (vertex 78) (vertex 17) (vertex 145) (vertex 33) (vertex 46) (vertex 108) (vertex 11) (vertex 61) (vertex 10) (vertex 36) (vertex 38)
+    (vertex 65) (vertex 35) (vertex 42) (vertex 96) (vertex 79) (vertex 107) (vertex 111) (vertex 131) (vertex 81) (vertex 140) (vertex 110) (vertex 139) (vertex 3) (vertex 21) (vertex 56) (vertex 2)
+    (vertex 74) (vertex 55) (vertex 44) (vertex 85) (vertex 84) (vertex 86) (vertex 29) (vertex 27) (vertex 26) (vertex 73) (vertex 72) (vertex 54) (vertex 71) (vertex 70) (vertex 68) (vertex 141)
+    (vertex 115) (vertex 69) (vertex 87))
+end
+  
+
+to setup
+  clear-all
+  setup-importer
+  assign-coord-portales
+  assign-path-portales
+  create-transmileio-bogota
+  create-portales-transmilenio
+  assign-portal
+  
+  reset-ticks
+end
+
+to go
+  driver-act
+  ;tick
+end
+
+to create-transmileio-bogota
+  create-transmilenios 1 [
+    setxy 0 7.392
+    set shape "target"
+    set color 14
+    set size 0.7
+    set heading 360
+    set path path-pA
+    
+    let vertex-to-move min-one-of (vertices) [ distance myself ]
+    set last_vertex vertex-to-move
+    move-to  vertex-to-move
+    
+    
+  ] 
+end
+
+to create-portales-transmilenio
+  create-portales 9 [
+    ;setxy xcor random  ycor] of vertex 87
+    set shape "square 2"
+    set color green
+    set size 0.7
+    set destination vertex 87
+
+  ]
+end
+  
+to assign-portal
+  assign-coord-portales
+  let y -1
+  foreach sort portales [ x ->  
+    set y y + 1 
+    ask x [
+      set xcor [xcor] of item y portales-coor
+      set ycor [ycor] of item y portales-coor
+    ]
+    ]
+end
+
+to go-towards [from-turtle to-turtle]
+  ask from-turtle [
+		let xcord [xcor] of to-turtle let ycord [ycor] of to-turtle
+    set heading towards to-turtle
+    forward 1.0E-500
+		move-to to-turtle
+  ]
+end
+
+to driver-act
+  
+  let transmileio-p transmilenio 151
+  foreach path-pA [ x -> 
+    let portal-p x
+    go-towards transmileio-p portal-p
+  tick
+  ]
+  
+end
+
