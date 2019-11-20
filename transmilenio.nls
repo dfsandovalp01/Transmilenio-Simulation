@@ -28,7 +28,7 @@ portales-own [
   last_status_change
 ]
 
-to assign-coord-portales
+to assign-coord-portales ;; aqui estoy
   set portales-coor (list (vertex 30) (vertex 20) (vertex 14) (vertex 95) (vertex 87) (vertex 138) (vertex 109) (vertex 142) (vertex 45))
 end
 
